@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
-import {hot} from 'react-hot-loader';
+import React, { useState } from "react";
+import { hot } from "react-hot-loader";
+import GameScreen from "./GameScreen";
+import AttractScreen from "./AttractScreen";
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const [isGameStarted, setGameStarted] = useState(false);
+  const [gameState, setGameState] = useState({});
   return (
-    <div>
-      This is a sample stateful React application.
-      <br />
-      <br />
-      Here is a button that will track
-      how many times you click it:
-      <br />
-      <br />
-      <button onClick={() => setCount(count + 1)}>{count}</button>
-    </div>
+    <>
+      {(isGameStarted && (
+        <GameScreen gameState={gameState} setGameState={setGameState} />
+      )) || (
+        <AttractScreen
+          setGameStarted={setGameStarted}
+          setGameState={setGameState}
+        />
+      )}
+    </>
   );
-}
+};
 
 export default hot(module)(App);
